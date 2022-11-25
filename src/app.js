@@ -4,8 +4,11 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
 
+const ClientError = require('./exceptions/ClientError')
+
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
+const makananRouter = require('./routes/makanan')
 
 const app = express()
 
@@ -19,5 +22,20 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
+app.use('/makanan', makananRouter)
+
+// Error handling
+app.use((error, req, res, next) => {
+  let { statusCode = 500, status = 'fail', message } = error
+
+  if (!(error instanceof ClientError)) {
+    message = 'Internal server error'
+  }
+
+  return res.status(statusCode).json({
+    status,
+    message
+  })
+})
 
 module.exports = app

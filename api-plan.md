@@ -3,6 +3,7 @@
 ## User
 
 ### Get ALL User
+
 Path: `/users`
 Method: `GET`
 
@@ -24,8 +25,34 @@ Response:
 }
 ```
 
+### Login
+
+Path: `/users/auth`
+Method: `POST`
+
+Body:
+
+```json
+{
+  "email": String,
+  "password": String
+}
+```
+
+Response:
+
+```json
+{
+  "status": "success",
+  "data": {
+    "access_token": "<random_token_from_jwt>"
+  }
+}
+```
+
 ### Get User By ID
-Path: `/users/:id`
+
+Path: `/users`
 Method: `GET`
 Headers: `Bearer Token`
 
@@ -57,20 +84,23 @@ Response:
 ```
 
 ### Create User as Register
+
 Path: `/users`
 Method: `POST`
 
 Body:
+
 ```json
 {
   "nama": String,
   "email": String,
   "password": String,
-  "tgl_lahir": Date,
+  "tgl_lahir": Date(YYYY-MM-DD),
   "tingi_badan": Number,
   "berat_badan": Number
 }
 ```
+
 Response:
 
 ```json
@@ -81,11 +111,13 @@ Response:
 ```
 
 ### Update User
+
 Path: `/users/:id`
 Method: `PUT`
 Headers: `Bearer Token`
 
 Body:
+
 ```json
 {
   "nama": String,
@@ -96,6 +128,7 @@ Body:
   "berat_badan": Number
 }
 ```
+
 Response:
 
 ```json
@@ -104,13 +137,16 @@ Response:
   "message": "User updated successfully"
 }
 ```
+
 ## Makanan
 
 ### Get All Makanan
+
 Path: `/foods`
 Method: `GET`
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -129,14 +165,17 @@ Response:
   }
 }
 ```
+
 ## Plan
 
 ### Get All Plan User
+
 Path: `/plans`
 Method: `GET`
 Headers: `Bearer Token`
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -167,11 +206,13 @@ Response:
 ```
 
 ### Create Plan User
+
 Path: `/plans`
 Method: `POST`
 Headers: `Bearer Token`
 
 Body:
+
 ```json
 {
   "food_id": Number,
@@ -180,6 +221,7 @@ Body:
 ```
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -188,11 +230,13 @@ Response:
 ```
 
 ### Update Plan User
+
 Path: `/plans/:id`
 Method: `PUT`
 Headers: `Bearer Token`
 
 Body:
+
 ```json
 {
   "status": Number
@@ -200,6 +244,7 @@ Body:
 ```
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -208,11 +253,13 @@ Response:
 ```
 
 ### Delete Plan User
+
 Path: `/plans/:id`
 Method: `DELETE`
 Headers: `Bearer Token`
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -221,17 +268,20 @@ Response:
 ```
 
 ### Get All History User
+
 Path: `/histories`
 Method: `GET`
 Headers: `Bearer Token`
 
 Query:
+
 ```
 start_date=
 end_date=
 ```
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -254,4 +304,3 @@ Response:
   }
 }
 ```
-
