@@ -12,8 +12,9 @@ class UserService {
   constructor () {
     this.#model = User
 
-    this.create = this.create.bind(this)
     this.get = this.get.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
   }
 
   async create ({ nama, email, password, tglLahir, beratBadan, tinggiBadan }) {
@@ -58,6 +59,40 @@ class UserService {
     }
 
     return user
+  }
+
+  async update (userId, { nama, email, password, tgl_lahir: tglLahir, berat_badan: beratBadan, tinggi_badan: tinggiBadan }) {
+    const user = await this.#model.findByPk(userId, {
+      include: [{
+        model: Profile,
+        as: 'profiles'
+      }]
+    })
+    if (!user) {
+      throw new NotFoundError('User not found')
+    }
+
+    const dataUser = {
+      ...(nama) && ({ nama }),
+      ...(email) && ({ email }),
+      ...(password) && ({ password: bcrypt.hashSync(password, this.#salt) })
+    }
+
+    // user profile UPDATE
+    const profiles = {
+      ...(tglLahir) && ({ tgl_lahir: tglLahir }),
+      ...(beratBadan) && ({ berat_badan: beratBadan }),
+      ...(tinggiBadan) && ({ tinggi_badan: tinggiBadan })
+    }
+
+    if (profiles) {
+      await Profile.update(profiles, { where: { user_id: userId } })
+    }
+
+    // user UPDATE
+    await user.update(dataUser)
+
+    return true
   }
 
   async createAuthentication ({ email, password }) {

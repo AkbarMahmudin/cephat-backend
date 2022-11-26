@@ -11,10 +11,12 @@ const userController = new UserController(userService, tokenManager)
 const userValidator = require('../validator/UserValidator')
 const verifyToken = require('../middleware/VerifyToken')
 
-/* GET users listing. */
 router.post('/auth', userController.createAuthentication)
+
 router.use(verifyToken)
-router.post('/', userValidator, userController.create)
+
 router.get('/', userController.get)
+router.post('/', userValidator.postValidator, userController.create)
+router.put('/', userValidator.putValidator, userController.update)
 
 module.exports = router

@@ -8,11 +8,12 @@ class MakananController {
   }
 
   async getAll (req, res) {
-    const makanan = await this.#service.getAll()
+    const { page = 1, limit = 10, s } = req.query
+    const makanan = await this.#service.getAll({ page, limit, s })
 
     return res.json({
       status: 'success',
-      data: { makanan }
+      data: makanan
     })
   }
 }

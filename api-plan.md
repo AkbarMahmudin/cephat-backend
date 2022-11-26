@@ -112,7 +112,7 @@ Response:
 
 ### Update User
 
-Path: `/users/:id`
+Path: `/users`
 Method: `PUT`
 Headers: `Bearer Token`
 
@@ -142,8 +142,17 @@ Response:
 
 ### Get All Makanan
 
-Path: `/foods`
+Path: `/makanan`
 Method: `GET`
+
+Query:
+
+
+| Query params | Type   | Default |
+| -------------- | -------- | --------- |
+| page         | number | 1       |
+| limit        | number | 10      |
+| s            | string |         |
 
 Response:
 
@@ -151,7 +160,7 @@ Response:
 {
   "status": "success",
   "data": {
-    "foods": [
+    "makanan": [
       {
         "nama": "<food_name>",
         "kalori": "<kalori>",
@@ -161,7 +170,13 @@ Response:
         "image": "<food_image>"
       },
       ...
-    ]
+    ],
+    "metadata": {
+      "total_data": "<count_data>",
+      "total_page": "<count_all_page>",
+      "data_per_page": "<limit_per_page>",
+      "current_page": "<page_active>"
+    }
   }
 }
 ```
@@ -215,7 +230,7 @@ Body:
 
 ```json
 {
-  "food_id": Number,
+  "makanan_id": Number,
   "user_id": Number
 }
 ```

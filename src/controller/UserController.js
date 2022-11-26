@@ -6,8 +6,9 @@ class UserController {
     this.#service = service
     this.#tokenManager = tokenManager
 
-    this.create = this.create.bind(this)
     this.get = this.get.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
     this.createAuthentication = this.createAuthentication.bind(this)
   }
 
@@ -38,6 +39,20 @@ class UserController {
       return res.json({
         status: 'success',
         data: { user }
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async update (req, res, next) {
+    try {
+      const { userId } = req
+      await this.#service.update(userId, req.body)
+
+      return res.json({
+        status: 'success',
+        message: 'User updated successfullly'
       })
     } catch (error) {
       next(error)
