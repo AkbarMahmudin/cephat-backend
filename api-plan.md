@@ -142,7 +142,7 @@ Response:
 
 ### Get All Makanan
 
-Path: `/foods`
+Path: `/makanan`
 Method: `GET`
 
 Response:
@@ -151,14 +151,14 @@ Response:
 {
   "status": "success",
   "data": {
-    "foods": [
+    "makanan": [
       {
-        "nama": "<food_name>",
+        "nama": "<makanan_name>",
         "kalori": "<kalori>",
         "protein": "<protein>",
         "karbohidrat": "<karbohidrat>",
         "lemak": "<lemak>",
-        "image": "<food_image>"
+        "image": "<makanan_image>"
       },
       ...
     ]
@@ -183,24 +183,27 @@ Response:
     "plans": [
       {
         "id": "<planId>",
-        "food": {
-          "id": "<foodId>",
-          "nama": "<food_name>",
-          "kalori": "<kalori>",
-          "protein": "<protein>",
-          "karbohidrat": "<karbohidrat>",
-          "lemak": "<lemak>",
-          "image": "<food_image>",
+        "qty": "<num_qty>",
+        "is_done": "<bool_isDone>",
+        "makanan": {
+          "id": "<makananId>",
+          "nama": "<makanan_name>",
+          "image": "<makanan_image>",
+          "total_kalori": "<kalori>",
+          "total_protein": "<protein>",
+          "total_karbohidrat": "<karbohidrat>",
+          "total_lemak": "<lemak>"
         },
-        "status": "<status>"
       },
       ...
     ],
-    "count_foods": "<count_num_foods>",
-    "count_calories": "<count_num_calories>",
-    "count_proteins": "<count_num_proteins>",
-    "count_carbohydrates": "<count_num_carbohydrates>",
-    "count_fat": "<count_num_fat>"
+    "metadata": {
+      "count_makanan": "<count_num_makanan>",
+      "count_kalori": "<count_num_kalori>",
+      "count_protein": "<count_num_protein>",
+      "count_karbohidrat": "<count_num_karbohidrat>",
+      "count_lemak": "<count_num_lemak>"
+    }
   }
 }
 ```
@@ -215,7 +218,7 @@ Body:
 
 ```json
 {
-  "food_id": Number,
+  "makanan_id": Number,
   "user_id": Number
 }
 ```
@@ -239,7 +242,8 @@ Body:
 
 ```json
 {
-  "status": Number
+  "id_done": Boolean,
+  "qty": Number
 }
 ```
 
@@ -289,13 +293,13 @@ Response:
     "histories": [
       {
         "id": "<historyId>",
-        "food": {
-          "nama": "<food_name>",
+        "makanan": {
+          "nama": "<makanan_name>",
           "kalori": "<kalori>",
           "protein": "<protein>",
           "karbohidrat": "<karbohidrat>",
           "lemak": "<lemak>",
-          "image": "<food_image>"
+          "image": "<makanan_image>"
         },
         "tgl": "<date_consume>"
       },

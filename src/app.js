@@ -9,6 +9,7 @@ const ClientError = require('./exceptions/ClientError')
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const makananRouter = require('./routes/makanan')
+const plansRouter = require('./routes/plans')
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/makanan', makananRouter)
+app.use('/plans', plansRouter)
 
 // Error handling
 app.use((error, req, res, next) => {
