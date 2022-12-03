@@ -10,6 +10,8 @@ class PlanService {
 
     this.createPlan = this.createPlan.bind(this)
     this.getAllPlanByUserId = this.getAllPlanByUserId.bind(this)
+    this.updatePlanById = this.updatePlanById.bind(this)
+    this.deletePlanById = this.deletePlanById.bind(this)
   }
 
   async createPlan ({ makananId, userId, qty = 1, isDone = false }) {
@@ -50,14 +52,38 @@ class PlanService {
       }]
     })
 
+    if (!plans.length) {
+      return []
+    }
+
     return plans
   }
 
-  async updatePlan (planId, { qty, isDone }) {
+  async updatePlanById (planId, { qty, isDone }) {
     const plan = await this.#model.findByPk(planId)
     if (!plan) {
       throw new NotFoundError('Plan not found')
     }
+
+    const data = {
+      ...(qty) && ({ qty }),
+      ...(isDone) && ({ is_done: isDone })
+    }
+
+    await plan.update(data)
+
+    return plan
+  }
+
+  async deletePlanById (planId) {
+    const plan = await this.#model.findByPk(planId)
+    if (!plan) {
+      throw new NotFoundError('Plan not found')
+    }
+
+    await plan.destroy()
+
+    return true
   }
 }
 

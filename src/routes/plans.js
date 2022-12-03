@@ -12,5 +12,7 @@ const verifyToken = require('../middleware/VerifyToken')
 router.use(verifyToken)
 router.get('/', planController.getAllPlanByUserId)
 router.post('/', planController.createPlan)
+router.put('/:id', planController.updatePlanById)
+router.delete('/:id', planController.deletePlanById)
 
 module.exports = router
