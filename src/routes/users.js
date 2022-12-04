@@ -13,10 +13,10 @@ const verifyToken = require('../middleware/VerifyToken')
 
 router.post('/auth', userController.createAuthentication)
 
+router.post('/', userValidator.postValidator, userController.create)
 router.use(verifyToken)
 
 router.get('/', userController.get)
-router.post('/', userValidator.postValidator, userController.create)
 router.put('/', userValidator.putValidator, userController.update)
 
 module.exports = router
