@@ -17,7 +17,8 @@ class UserController {
       const { body } = req
       await this.#service.create({
         ...body,
-        tglLahir: body.tgl_lahir,
+        jenisKelamin: body.jenis_kelamin,
+        levelAktivitas: body.level_aktivitas,
         beratBadan: body.berat_badan,
         tinggiBadan: body.tinggi_badan
       })

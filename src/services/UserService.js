@@ -1,4 +1,4 @@
-const { User, Profile } = require('../database/models')
+const { User, Profile, NutritionProfile } = require('../database/models')
 const bcrypt = require('bcrypt')
 
 const ConflictError = require('../exceptions/ConflictError')
@@ -17,7 +17,9 @@ class UserService {
     this.update = this.update.bind(this)
   }
 
-  async create ({ nama, email, password, tglLahir, beratBadan, tinggiBadan }) {
+  async create ({
+    nama, email, password, umur, jenisKelamin, levelAktivitas, beratBadan, tinggiBadan, kalori, protein, lemak, karbohidrat
+  }) {
     const user = await this.#model.count({ where: { email } })
     if (user !== 0) {
       throw new ConflictError('Email already exist')
@@ -28,15 +30,26 @@ class UserService {
       email,
       password: bcrypt.hashSync(password, this.#salt),
       profiles: {
-        tgl_lahir: tglLahir,
+        umur,
+        jenis_kelamin: jenisKelamin,
+        level_aktivitas: levelAktivitas,
         berat_badan: beratBadan,
         tinggi_badan: tinggiBadan
+      },
+      nutrition_profiles: {
+        kalori, protein, lemak, karbohidrat
       }
     }, {
-      include: [{
-        model: Profile,
-        as: 'profiles'
-      }]
+      include: [
+        {
+          model: Profile,
+          as: 'profiles'
+        },
+        {
+          model: NutritionProfile,
+          as: 'nutrition_profiles'
+        }
+      ]
     })
 
     return newUser
@@ -47,11 +60,20 @@ class UserService {
       attributes: {
         exclude: ['password']
       },
-      include: [{
-        model: Profile,
-        as: 'profiles',
-        attributes: ['tgl_lahir', 'tinggi_badan', 'berat_badan']
-      }]
+      include: [
+        {
+          model: Profile,
+          as: 'profiles',
+          attributes: ['umur', 'jenis_kelamin', 'level_aktivitas', 'tinggi_badan', 'berat_badan']
+        },
+        {
+          model: NutritionProfile,
+          as: 'nutrition_profiles',
+          attributes: {
+            exclude: ['id', 'user_id', 'createdAt', 'updatedAt']
+          }
+        }
+      ]
     })
 
     if (!user) {
@@ -61,7 +83,9 @@ class UserService {
     return user
   }
 
-  async update (userId, { nama, email, password, tgl_lahir: tglLahir, berat_badan: beratBadan, tinggi_badan: tinggiBadan }) {
+  async update (userId, {
+    nama, email, password, umur, jenis_kelamin: jenisKelamin, level_aktivitas: levelAktivitas, berat_badan: beratBadan, tinggi_badan: tinggiBadan, kalori, protein, lemak, karbohidrat
+  }) {
     const user = await this.#model.findByPk(userId, {
       include: [{
         model: Profile,
@@ -72,6 +96,16 @@ class UserService {
       throw new NotFoundError('User not found')
     }
 
+    // email already exist
+    if (email) {
+      const usersEmail = await this.#model.findAll({
+        where: { email }
+      })
+      if (usersEmail && email !== user.email) {
+        throw new ConflictError('Email is already exist')
+      }
+    }
+
     const dataUser = {
       ...(nama) && ({ nama }),
       ...(email) && ({ email }),
@@ -80,13 +114,27 @@ class UserService {
 
     // user profile UPDATE
     const profiles = {
-      ...(tglLahir) && ({ tgl_lahir: tglLahir }),
+      ...(umur) && ({ umur }),
+      ...(jenisKelamin) && ({ jenis_kelamin: jenisKelamin }),
+      ...(levelAktivitas) && ({ level_aktivitas: levelAktivitas }),
       ...(beratBadan) && ({ berat_badan: beratBadan }),
       ...(tinggiBadan) && ({ tinggi_badan: tinggiBadan })
     }
 
     if (profiles) {
       await Profile.update(profiles, { where: { user_id: userId } })
+    }
+
+    // user nutrition profile UPDATE
+    const nutritionProfiles = {
+      ...(kalori) && ({ kalori }),
+      ...(protein) && ({ protein }),
+      ...(lemak) && ({ lemak }),
+      ...(karbohidrat) && ({ karbohidrat })
+    }
+
+    if (nutritionProfiles) {
+      await NutritionProfile.update(nutritionProfiles, { where: { user_id: userId } })
     }
 
     // user UPDATE

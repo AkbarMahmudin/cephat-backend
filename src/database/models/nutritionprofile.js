@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class Profile extends Model {
+  class NutritionProfile extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,17 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, { as: 'users', foreignKey: 'user_id' })
     }
   }
-  Profile.init({
-    umur: DataTypes.INTEGER,
-    jenis_kelamin: DataTypes.ENUM(['L', 'P']),
-    level_aktivitas: DataTypes.STRING,
-    tinggi_badan: DataTypes.DOUBLE,
-    berat_badan: DataTypes.DOUBLE,
+  NutritionProfile.init({
+    kalori: DataTypes.DOUBLE,
+    protein: DataTypes.DOUBLE,
+    karbohidrat: DataTypes.DOUBLE,
+    lemak: DataTypes.DOUBLE,
     user_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Profile',
-    tableName: 'profiles'
+    modelName: 'NutritionProfile',
+    tableName: 'nutrition_profiles'
   })
-  return Profile
+  return NutritionProfile
 }

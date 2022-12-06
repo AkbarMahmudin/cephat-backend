@@ -2,29 +2,6 @@
 
 ## User
 
-### Get ALL User
-
-Path: `/users`
-Method: `GET`
-
-Response:
-
-```json
-{
-  "status": "success",
-  "data": {
-    "users": [
-      {
-        "id": "<userId>",
-        "name": "<name>",
-        "email": "<email>"
-      },
-      ...
-    ]
-  }
-}
-```
-
 ### Login
 
 Path: `/users/auth`
@@ -67,7 +44,8 @@ Response:
       "nama": "<name>",
       "email": "<email>",
       "profile": {
-        "tgl_lahir": "<date_birthday>",
+        "umur": "<age>",
+        "level_aktivitas": "<aktivitas>",
         "jenis_kelamin": "<L || P>",
         "tinggi_badan": "<tinggi_badan>",
         "berat_badan": "<berat_badan>"
@@ -95,9 +73,17 @@ Body:
   "nama": String,
   "email": String,
   "password": String,
-  "tgl_lahir": Date(YYYY-MM-DD),
+  // profile
+  "umur": Number,
+  "jenis_kelamin": String,
+  "level_aktivitas": String,
   "tingi_badan": Number,
-  "berat_badan": Number
+  "berat_badan": Number,
+  // nutrition profile
+  "kalori": Number,
+  "protein": Number,
+  "karbohidrat": Number,
+  "lemak": Number
 }
 ```
 
@@ -123,9 +109,16 @@ Body:
   "nama": String,
   "email": String,
   "password": String,
-  "tgl_lahir": Date,
+  // profile
+  "umur": Number,
+  "level_aktivitas": String,
   "tingi_badan": Number,
-  "berat_badan": Number
+  "berat_badan": Number,
+  // nutrition profile
+  "kalori": Number,
+  "protein": Number,
+  "karbohidrat": Number,
+  "lemak": Number
 }
 ```
 
