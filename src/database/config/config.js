@@ -4,7 +4,8 @@ const {
   DBNAME,
   DBHOST,
   DBUSERNAME,
-  DBPASSWORD
+  DBPASSWORD,
+  DBDIALECT
 } = process.env
 
 module.exports = {
@@ -13,20 +14,20 @@ module.exports = {
     password: DBPASSWORD,
     database: DBNAME,
     host: DBHOST,
-    dialect: 'postgres'
+    dialect: DBDIALECT
   },
   test: {
     username: DBUSERNAME,
     password: DBPASSWORD,
     database: DBNAME,
     host: DBHOST,
-    dialect: 'postgres'
+    dialect: DBDIALECT
   },
   production: {
     username: DBUSERNAME,
     password: DBPASSWORD,
     database: DBNAME,
     host: DBHOST,
-    dialect: 'postgres'
+    dialect: DBDIALECT
   }
 }

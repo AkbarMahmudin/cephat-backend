@@ -2,26 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('profiles', {
+    await queryInterface.createTable('nutrition_profiles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      umur: {
-        type: Sequelize.INTEGER
-      },
-      jenis_kelamin: {
-        type: Sequelize.ENUM(['L', 'P'])
-      },
-      level_aktivitas: {
-        type: Sequelize.STRING
-      },
-      tinggi_badan: {
+      kalori: {
         type: Sequelize.DOUBLE
       },
-      berat_badan: {
+      protein: {
+        type: Sequelize.DOUBLE
+      },
+      karbohidrat: {
+        type: Sequelize.DOUBLE
+      },
+      lemak: {
         type: Sequelize.DOUBLE
       },
       user_id: {
@@ -42,6 +39,6 @@ module.exports = {
     })
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('profiles')
+    await queryInterface.dropTable('nutrition_profiles')
   }
 }
