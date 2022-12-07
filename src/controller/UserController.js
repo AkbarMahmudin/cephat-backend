@@ -15,6 +15,7 @@ class UserController {
   async create (req, res, next) {
     try {
       const { body } = req
+      console.log(body)
       await this.#service.create({
         ...body,
         jenisKelamin: body.jenis_kelamin,
