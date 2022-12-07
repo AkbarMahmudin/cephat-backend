@@ -1,5 +1,5 @@
 const getImageUrl = (filename, req) => {
-  return `${req.protocol}://${req.get('host')}/images/${filename || 'no-image.svg'}`
+  return filename ? `${req.protocol}://${req.get('host')}/images/${filename}` : null
 }
 
 module.exports = {

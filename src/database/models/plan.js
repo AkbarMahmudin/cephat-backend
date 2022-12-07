@@ -24,5 +24,32 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Plan',
     tableName: 'plans'
   })
+
+  Plan.addHook('afterUpdate', async (plan) => {
+    const { id: planId, user_id: userId, makanan_id: makananId, qty } = plan
+    const makanan = await sequelize.models.Makanan.findByPk(makananId)
+    const history = await sequelize.models.ConsumeHistory.findOne({
+      where: {
+        plan_id: planId
+      }
+    })
+
+    // Status is done
+    if (plan.is_done && !history) {
+      await sequelize.models.ConsumeHistory.create({
+        user_id: userId,
+        makanan_id: makananId,
+        plan_id: planId,
+        qty,
+        total_berat: makanan.berat * qty,
+        total_kalori: makanan.kalori * qty,
+        total_protein: makanan.protein * qty,
+        total_karbohidrat: makanan.karbohidrat * qty,
+        total_lemak: makanan.lemak * qty
+      })
+    } else if (!plan.is_done && history) {
+      await history.destroy()
+    }
+  })
   return Plan
 }

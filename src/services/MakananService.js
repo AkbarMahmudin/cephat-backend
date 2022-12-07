@@ -12,7 +12,7 @@ class MakananService {
   async getAll (query) {
     const options = {
       attributes: {
-        exlude: ['createdAt', 'updatedAt'],
+        exclude: ['createdAt', 'updatedAt'],
         order: [['nama', 'ASC']]
       }
     }

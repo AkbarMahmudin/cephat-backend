@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const makananRouter = require('./routes/makanan')
 const plansRouter = require('./routes/plans')
+const consumeHistoriesRouter = require('./routes/consume-histories')
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/makanan', makananRouter)
 app.use('/plans', plansRouter)
+app.use('/histories', consumeHistoriesRouter)
 
 // Error handling
 app.use((error, req, res, next) => {

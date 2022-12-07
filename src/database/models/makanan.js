@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       this.hasMany(models.Plan, { as: 'plans', foreignKey: 'makanan_id' })
+      this.hasMany(models.ConsumeHistory, { as: 'consume_histories', foreignKey: 'makanan_id' })
     }
   }
   Makanan.init({

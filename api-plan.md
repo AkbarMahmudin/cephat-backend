@@ -141,11 +141,11 @@ Method: `GET`
 Query:
 
 
-| Query params | Type   | Default |
-| -------------- | -------- | --------- |
-| page         | number | 1       |
-| limit        | number | 10      |
-| s            | string |         |
+| Query params | Type   | Default | Ket.                               |
+| -------------- | -------- | --------- | ------------------------------------ |
+| page         | number | 1       |                                    |
+| limit        | number | 10      |                                    |
+| s            | string |         | Pencarian berdasarkan nama makanan |
 
 Response:
 
@@ -197,6 +197,7 @@ Response:
           "id": "<makananId>",
           "nama": "<makanan_name>",
           "image": "<makanan_image>",
+          "total_berat": "<berat>",
           "total_kalori": "<kalori>",
           "total_protein": "<protein>",
           "total_karbohidrat": "<karbohidrat>",
@@ -236,7 +237,7 @@ Response:
 ```json
 {
   "status": "success",
-  "message": "plan created successfully"
+  "message": "Plan created successfully"
 }
 ```
 
@@ -275,7 +276,7 @@ Response:
 ```json
 {
   "status": "success",
-  "message": "plan deleted successfully"
+  "message": "Plan deleted successfully"
 }
 ```
 
@@ -287,10 +288,16 @@ Headers: `Bearer Token`
 
 Query:
 
-```
-start_date=
-end_date=
-```
+
+| Query params | Type         | Default | Ket.                                        |
+| -------------- | -------------- | --------- | --------------------------------------------- |
+| page         | number       | 1       |                                             |
+| limit        | number       | 10      |                                             |
+| s            | string       |         | Pencarian berdasarkan nama makanan          |
+| start_date   | string<date> |         | Filter histori berdasarkan tanggal konsumsi |
+| end_date     | string<date> |         | Filter histori berdasarkan tanggal konsumsi |
+
+
 
 Response:
 
