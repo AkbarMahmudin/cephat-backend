@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'cephat-api'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8CD7D4EFF61749DEAAB2C975782D09C3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_01929801162F42148ED34BA7F9B0A072 }}
           package: .
