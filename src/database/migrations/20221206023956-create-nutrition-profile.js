@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       protein: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.JSON
       },
       karbohidrat: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.JSON
       },
       lemak: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.JSON
       },
       user_id: {
         type: Sequelize.INTEGER,

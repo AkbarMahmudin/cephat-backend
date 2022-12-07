@@ -17,9 +17,9 @@ const postValidator = (req, res, next) => {
       tinggi_badan: Joi.number().required(),
       // nutrition profile
       kalori: Joi.number().required(),
-      karbohidrat: Joi.number().required(),
-      protein: Joi.number().required(),
-      lemak: Joi.number().required()
+      karbohidrat: Joi.object().required(),
+      protein: Joi.object().required(),
+      lemak: Joi.object().required()
     })
 
     const validationResult = schema.validate(req.body)
@@ -47,9 +47,9 @@ const putValidator = (req, res, next) => {
       tinggi_badan: Joi.number(),
       // nutrition profile
       kalori: Joi.number(),
-      karbohidrat: Joi.number(),
-      protein: Joi.number(),
-      lemak: Joi.number()
+      karbohidrat: Joi.object(),
+      protein: Joi.object(),
+      lemak: Joi.object()
     })
 
     const validationResult = schema.validate(req.body)

@@ -37,7 +37,10 @@ class UserService {
         tinggi_badan: tinggiBadan
       },
       nutrition_profiles: {
-        kalori, protein, lemak, karbohidrat
+        kalori,
+        protein: JSON.stringify(protein),
+        lemak: JSON.stringify(lemak),
+        karbohidrat: JSON.stringify(karbohidrat)
       }
     }, {
       include: [
@@ -79,6 +82,11 @@ class UserService {
     if (!user) {
       throw new NotFoundError('User not found')
     }
+
+    const { nutrition_profiles: nutritionProfiles } = user.dataValues
+    nutritionProfiles.protein = JSON.parse(nutritionProfiles.protein)
+    nutritionProfiles.karbohidrat = JSON.parse(nutritionProfiles.karbohidrat)
+    nutritionProfiles.lemak = JSON.parse(nutritionProfiles.lemak)
 
     return user
   }
@@ -128,9 +136,9 @@ class UserService {
     // user nutrition profile UPDATE
     const nutritionProfiles = {
       ...(kalori) && ({ kalori }),
-      ...(protein) && ({ protein }),
-      ...(lemak) && ({ lemak }),
-      ...(karbohidrat) && ({ karbohidrat })
+      ...(protein) && ({ protein: JSON.stringify(protein) }),
+      ...(lemak) && ({ lemak: JSON.stringify(lemak) }),
+      ...(karbohidrat) && ({ karbohidrat: JSON.stringify(karbohidrat) })
     }
 
     if (nutritionProfiles) {

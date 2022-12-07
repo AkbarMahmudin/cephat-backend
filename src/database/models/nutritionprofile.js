@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   NutritionProfile.init({
     kalori: DataTypes.DOUBLE,
-    protein: DataTypes.DOUBLE,
-    karbohidrat: DataTypes.DOUBLE,
-    lemak: DataTypes.DOUBLE,
+    protein: DataTypes.JSON,
+    karbohidrat: DataTypes.JSON,
+    lemak: DataTypes.JSON,
     user_id: DataTypes.INTEGER
   }, {
     sequelize,
