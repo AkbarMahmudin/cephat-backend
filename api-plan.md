@@ -52,9 +52,18 @@ Response:
       },
       "nutrition_profile": {
         "kalori": "<kalori>",
-        "protein": "<protein>",
-        "karbohidrat": "<karbohidrat>",
-        "lemak": "<lemak>",
+        "protein": {
+          "min": "<num_min>"
+          "mix": "<num_mix>"
+        },
+        "karbohidrat": {
+          "min": "<num_min>"
+          "mix": "<num_mix>"
+        },,
+        "lemak": {
+          "min": "<num_min>"
+          "mix": "<num_mix>"
+        },
       }
     }
   }
@@ -81,9 +90,18 @@ Body:
   "berat_badan": Number,
   // nutrition profile
   "kalori": Number,
-  "protein": Number,
-  "karbohidrat": Number,
-  "lemak": Number
+  "protein": {
+    "min": Number,
+    "mix": Number
+  },
+  "karbohidrat": {
+    "min": Number,
+    "mix": Number
+  },,
+  "lemak": {
+    "min": Number,
+    "mix": Number
+  },
 }
 ```
 
@@ -116,9 +134,18 @@ Body:
   "berat_badan": Number,
   // nutrition profile
   "kalori": Number,
-  "protein": Number,
-  "karbohidrat": Number,
-  "lemak": Number
+  "protein": {
+    "min": Number,
+    "mix": Number
+  },
+  "karbohidrat": {
+    "min": Number,
+    "mix": Number
+  },,
+  "lemak": {
+    "min": Number,
+    "mix": Number
+  },
 }
 ```
 
