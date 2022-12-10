@@ -1,5 +1,3 @@
-const { getImageUrl } = require('../utils/image')
-
 class ConsumeHistoryController {
   #service
 
@@ -38,23 +36,11 @@ class ConsumeHistoryController {
       const { metadata, histories } = await this.#service.getAllHistory(userId, {
         page, limit, s, startDate, endDate
       })
-      const historiesMapped = histories
-        ? histories.map((history) => {
-          const { makanan } = history.dataValues
-          return {
-            ...history.dataValues,
-            makanan: {
-              ...makanan.dataValues,
-              image: getImageUrl(makanan.image, req)
-            }
-          }
-        })
-        : []
 
       return res.json({
         status: 'success',
         data: {
-          histories: historiesMapped,
+          histories,
           metadata
         }
       })

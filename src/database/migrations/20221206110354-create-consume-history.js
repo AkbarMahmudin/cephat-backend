@@ -55,7 +55,7 @@ module.exports = {
       tgl_konsumsi: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Date.now()
+        defaultValue: new Date()
       },
       createdAt: {
         allowNull: false,

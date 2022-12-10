@@ -30,7 +30,7 @@ class MakananService {
     if (s) {
       options.where = {
         nama: {
-          [Op.iLike]: `${s}%`
+          [Op.like]: `${s}%`
         }
       }
     }
