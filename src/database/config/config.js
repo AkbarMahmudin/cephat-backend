@@ -15,6 +15,9 @@ module.exports = {
     database: DBNAME,
     host: DBHOST,
     dialect: DBDIALECT,
+    dialectOptions: {
+      connectTimeout: 20000
+    },
     pool: {
       max: 5,
       min: 0,
@@ -27,6 +30,9 @@ module.exports = {
     database: DBNAME,
     host: DBHOST,
     dialect: DBDIALECT,
+    dialectOptions: {
+      connectTimeout: 20000
+    },
     pool: {
       max: 5,
       min: 0,
@@ -39,6 +45,9 @@ module.exports = {
     database: DBNAME,
     host: DBHOST,
     dialect: DBDIALECT,
+    dialectOptions: {
+      connectTimeout: 20000
+    },
     pool: {
       max: 5,
       min: 0,
