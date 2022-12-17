@@ -3,6 +3,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const timeout = require('connect-timeout')
 
 // const ClientError = require('./exceptions/ClientError')
 
@@ -15,6 +16,12 @@ const consumeHistoriesRouter = require('./routes/consume-histories')
 const app = express()
 
 require('dotenv').config()
+
+app.use(timeout(process.env.TIMEOUT))
+app.use((req, res, next) => {
+  if (!req.timedout) next()
+})
+
 app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
