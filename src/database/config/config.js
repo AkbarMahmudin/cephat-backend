@@ -5,7 +5,8 @@ const {
   DBHOST,
   DBUSERNAME,
   DBPASSWORD,
-  DBDIALECT
+  DBDIALECT,
+  DBPORT
 } = process.env
 
 module.exports = {
@@ -44,6 +45,7 @@ module.exports = {
     password: DBPASSWORD,
     database: DBNAME,
     host: DBHOST,
+    port: DBPORT,
     dialect: DBDIALECT,
     dialectOptions: {
       connectTimeout: 20000
